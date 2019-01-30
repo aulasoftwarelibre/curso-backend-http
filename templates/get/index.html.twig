@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GetController{% endblock %}
+
+{% block body %}
+<div class="ui segment">
+    <h1>Peticiones GET</h1>
+
+    <p>
+        GET es el método más común para hacer peticiones de datos a un recurso especificado. Las consultas son parte
+        de la URL.
+    </p>
+
+    <p>Características</p>
+
+    <ul>
+        <li>GET requests can be cached</li>
+        <li>GET requests remain in the browser history</li>
+        <li>GET requests can be bookmarked</li>
+        <li>GET requests should never be used when dealing with sensitive data</li>
+        <li>GET requests have length restrictions</li>
+        <li>GET requests is only used to request data (not modify)</li>
+    </ul>
+
+    <p>Pulsa el siguiente botón para cargar esta página como método GET:</p>
+
+    <div class="ui segment basic">
+
+        <a href="{{ path('get') }}" class="ui link">CARGAR</a>
+        <a href="{{ path('get') }}?q=hola" class="ui link">CARGAR con parámetros</a>
+    </div>
+
+    <p>Esta página se ha cargado usando el siguiente método HTTP:</p>
+
+    <div class="ui compact segment">
+        <div class="ui top attached label">Método</div>
+        <div class="ui statistic">
+            <div class="value">
+                {{ app.request.method }}
+            </div>
+        </div>
+    </div>
+
+    {% if app.request.get('q') %}
+        <p>
+        El valor de 'q' es: {{ app.request.get('q') }}
+        </p>
+    {% endif %}
+
+    <h2>Ejemplo</h2>
+
+    <pre><code class="language-html">{{ '<a href="ruta?parametro=valor">Enlace GET</a>' | e }}</code></pre>
+</div>
+
+<div class="ui segment">
+    <resource>
+        Referencia: <a href="https://www.w3schools.com/tags/ref_httpmethods.asp">HTTP Request Methods</a>
+    </resource>
+</div>
+
+{% endblock %}

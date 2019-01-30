@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PostController{% endblock %}
+
+{% block body %}
+    <div class="ui segment">
+        <h1>Peticiones POST</h1>
+
+        <p>
+            POST es utilizado para enviar datos al servidor que serán usados para crear o actualizar recursos.
+        </p>
+
+        <p>Características</p>
+
+        <ul>
+            <li>POST requests are never cached</li>
+            <li>POST requests do not remain in the browser history</li>
+            <li>POST requests cannot be bookmarked</li>
+            <li>POST requests have no restrictions on data length</li>
+        </ul>
+
+        <p>Pulsa el siguiente botón para cargar esta página como método GET o POST:</p>
+
+        <div class="ui segment basic">
+            <form class="ui form" action="{{ path('post') }}" method="post">
+                <div class="field">
+                    <label>First Name</label>
+                    <input type="text" name="first-name" placeholder="First Name">
+                </div>
+                <div class="field">
+                    <label>Last Name</label>
+                    <input type="text" name="last-name" placeholder="Last Name">
+                </div>
+                <a href="{{ path('post') }}" class="ui link">CARGAR</a>
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+        </div>
+
+        <p>Esta página se ha cargado usando el siguiente método HTTP:</p>
+
+        <div class="ui compact segment">
+            <div class="ui top attached label">Método</div>
+            <div class="ui statistic">
+                <div class="value">
+                    {{ app.request.method }}
+                </div>
+            </div>
+        </div>
+
+        {% if app.request.method('post') %}
+            <p>
+                El valor del formulario es:
+                <ul>
+                {% for name, value in app.request.request.all %}
+                    <li><strong>{{ name }}</strong>: {{ value | default('Vacío') }}</li>
+                {% endfor %}
+                </ul>
+            </p>
+        {% endif %}
+    </div>
+
+    <div class="ui segment">
+        <resource>
+            Referencia: <a href="https://www.w3schools.com/tags/ref_httpmethods.asp">HTTP Request Methods</a>
+        </resource>
+    </div>
+
+{% endblock %}
