@@ -19,6 +19,17 @@
                 <a class="item" href="{{ path('post') }}">
                     Peticiones POST
                 </a>
+                <div class="item">
+                    <div class="header">
+                        Sesiones
+                    </div>
+                    <div class="menu">
+                        <a class="item" href="{{ path('session') }}">Crear</a>
+                        <a href="{{ path('session_buy') }}" class="item">Lista de compra</a>
+                        <a href="{{ path('session_safe_buy') }}" class="item">Lista de compra segura</a>
+                        <a class="item" href="{{ path('session_destroy') }}">Destruir</a>
+                    </div>
+                </div>
             </div>
             <div class="article" style="margin-left: 250px;">
                 <div class="ui main intro container" style="max-width: 650px; padding: 60px 10px; margin-left: 0px !important;">

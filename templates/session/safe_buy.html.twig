@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SessionController{% endblock %}
+
+{% block body %}
+    <div class="ui segment">
+        <h1>Sesiones</h1>
+
+        <p>
+            Sesiones
+        </p>
+
+        <table class="ui definition table">
+            <tbody>
+            <tr>
+                <td class="collapsing">Método</td>
+                <td>{{ app.request.method }}</td>
+            </tr>
+            <tr>
+                <td class="collapsing">Sesión</td>
+                <td>{{ session_id | default('None') }}</td>
+            </tr>
+            <tr>
+                <td class="collapsing">Token CSRF</td>
+                <td>{{ token | default('None') }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        {% if error %}
+            <div class="ui negative message">
+                Error en el token csrf
+            </div>
+        {% endif %}
+
+        <div class="ui segment basic">
+            <form class="ui form" action="{{ path('session_safe_buy') }}" method="post">
+                <div class="field">
+                    <label>Producto</label>
+                    <input type="text" name="name" placeholder="Indica el producto a comprar">
+                    <input type="hidden" name="token" value="{{ token }}" />
+                </div>
+                <button class="ui button" type="submit">Añadir</button>
+            </form>
+        </div>
+
+        <div class="ui segment basic">
+            <div class="ui list">
+                {% for product in products %}
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    {{ product }}
+                </div>
+                {% else %}
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        No hay productos
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <pre><code class="language-html">{%- autoescape 'html' %}
+{{ ('
+<form class="ui form" action="'~ path('session_safe_buy') ~'" method="post">
+    <div class="field">
+        <label>Producto</label>
+        <input type="text" name="name" placeholder="Indica el producto a comprar">
+        <input type="hidden" name="token" value="'~ token ~'" />
+    </div>
+    <a href="path.php" class="ui link">CARGAR</a>
+    <button class="ui button" type="submit">Submit</button>
+</form>
+') | e }}
+{% endautoescape -%}</code></pre>
+
+    </div>
+
+    <div class="ui segment">
+        <resource>
+            Ataque CSRF: <a href="https://www.uco.es/users/sergio/csrf-attack/" class="ui link">Prueba de ataque CSRF</a>
+        </resource>
+    </div>
+{% endblock %}

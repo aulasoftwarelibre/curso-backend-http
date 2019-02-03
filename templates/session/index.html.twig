@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SessionController{% endblock %}
+
+{% block body %}
+    <div class="ui segment">
+        <h1>Sesiones</h1>
+
+        <p>
+            Sesiones
+        </p>
+
+        <table class="ui definition table">
+            <tbody>
+            <tr>
+                <td class="collapsing">Sesión</td>
+                <td>{{ session_id | default('None') }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="ui segment basic">
+            <form class="ui form" action="{{ path('session_start') }}" method="post">
+                <div class="field">
+                    <label>Nombre de sesión</label>
+                    <input type="text" name="id" placeholder="Nombre">
+                </div>
+                <button class="ui button" type="submit">Crear</button>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

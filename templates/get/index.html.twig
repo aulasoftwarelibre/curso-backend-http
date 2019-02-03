@@ -30,22 +30,26 @@
         <a href="{{ path('get') }}?q=hola" class="ui link">CARGAR con parámetros</a>
     </div>
 
-    <p>Esta página se ha cargado usando el siguiente método HTTP:</p>
-
-    <div class="ui compact segment">
-        <div class="ui top attached label">Método</div>
-        <div class="ui statistic">
-            <div class="value">
-                {{ app.request.method }}
-            </div>
-        </div>
-    </div>
-
-    {% if app.request.get('q') %}
-        <p>
-        El valor de 'q' es: {{ app.request.get('q') }}
-        </p>
-    {% endif %}
+    <table class="ui definition table">
+        <tbody>
+        <tr>
+            <td class="collapsing">Método</td>
+            <td>{{ app.request.method }}</td>
+        </tr>
+        {% for name, value in app.request.query.all %}
+            <tr>
+                <td class="collapsing">Valor de {{ name }}</td>
+                <td>{{ value | default('Vacío') }}</td>
+            </tr>
+        {% endfor %}
+        {% if app.request.query.has('q') %}
+            <tr>
+                <td class="collapsing">Valor de q inseguro</td>
+                <td>{{ app.request.query.get('q') | raw }}</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 
     <h2>Ejemplo</h2>
 

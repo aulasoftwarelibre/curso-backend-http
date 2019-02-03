@@ -14,5 +14,3 @@ require('prismjs/themes/prism.css')
 const $ = require('jquery');
 require('fomantic-ui-css/semantic')
 require('prismjs/prism')
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

@@ -36,27 +36,41 @@
             </form>
         </div>
 
-        <p>Esta página se ha cargado usando el siguiente método HTTP:</p>
-
-        <div class="ui compact segment">
-            <div class="ui top attached label">Método</div>
-            <div class="ui statistic">
-                <div class="value">
-                    {{ app.request.method }}
-                </div>
-            </div>
-        </div>
-
-        {% if app.request.method('post') %}
-            <p>
-                El valor del formulario es:
-                <ul>
+        <table class="ui definition table">
+            <tbody>
+            <tr>
+                <td class="collapsing">Método</td>
+                <td>{{ app.request.method }}</td>
+            </tr>
+            {% if app.request.method('post') %}
                 {% for name, value in app.request.request.all %}
-                    <li><strong>{{ name }}</strong>: {{ value | default('Vacío') }}</li>
+                <tr>
+                    <td class="collapsing">Valor de {{ name }}</td>
+                    <td>{{ value | default('Vacío') }}</td>
+                </tr>
                 {% endfor %}
-                </ul>
-            </p>
-        {% endif %}
+            {% endif %}
+            </tbody>
+        </table>
+
+
+        <pre><code class="language-html">{%- autoescape 'html' %}
+{{ '
+<form class="ui form" action="path.php" method="post">
+    <div class="field">
+        <label>First Name</label>
+        <input type="text" name="first-name" placeholder="First Name">
+    </div>
+    <div class="field">
+        <label>Last Name</label>
+        <input type="text" name="last-name" placeholder="Last Name">
+    </div>
+    <a href="path.php" class="ui link">CARGAR</a>
+    <button class="ui button" type="submit">Submit</button>
+</form>
+' | e }}
+{% endautoescape -%}</code></pre>
+
     </div>
 
     <div class="ui segment">
