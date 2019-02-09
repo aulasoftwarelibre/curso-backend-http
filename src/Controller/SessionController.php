@@ -66,9 +66,9 @@ class SessionController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST'
             && array_key_exists('name', $_POST)
+            && !empty($_POST['name'])
         ) {
-            $product = $_POST['name'];
-            $_SESSION['products'][] = $product;
+            $_SESSION['products'][] = $_POST['name'];
         }
 
         return $this->render('session/buy.html.twig', [
