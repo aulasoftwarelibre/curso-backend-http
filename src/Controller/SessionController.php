@@ -29,7 +29,7 @@ class SessionController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST'
             && array_key_exists('id', $_POST)
         ) {
-            session_id($_POST[id]);
+            session_id($_POST['id']);
             session_start();
         }
 
